@@ -11,6 +11,27 @@ abstract class TimeRepresentation {
   TimeType getType();
 
   DateTime getTime();
+
+  Map toMap() {
+    return {"type": getType().index, "time": getTime()};
+  }
+}
+
+TimeRepresentation getTime(Map map) {
+  var ty = map["type"] as int;
+  var date = map["time"] as DateTime;
+  switch (TimeType.values[ty]) {
+    case TimeType.per30Min:
+      return Per30MinTime(date);
+    case TimeType.perDay:
+      return PerDayTime(date);
+    case TimeType.perWeek:
+      return PerWeekTime(date);
+    case TimeType.perMonth:
+      return PerMonthTime(date);
+    case TimeType.perYear:
+      return PerYearTime(date);
+  }
 }
 
 enum TimeType { per30Min, perDay, perWeek, perMonth, perYear }
@@ -72,10 +93,10 @@ class PerMonthTime extends TimeRepresentation {
   TimeType getType() => TimeType.perMonth;
 }
 
-class PerYearTime extends TimeRepresentation{
+class PerYearTime extends TimeRepresentation {
   int year;
 
-  PerYearTime(DateTime time ) : year = time.year;
+  PerYearTime(DateTime time) : year = time.year;
 
   @override
   DateTime getTime() => DateTime(year);

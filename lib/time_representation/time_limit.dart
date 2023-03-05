@@ -1,17 +1,30 @@
-
 import 'package:todo_record/time_representation/representation.dart';
 
-enum TimeMod{
-  deathLine,
-  limitless
-}
+enum TimeMod { deathLine, limitless }
 
-abstract class TimeToEnd{
+abstract class TimeToEnd {
   TimeMod getMod();
+
   TimeRepresentation? getTime();
+
+  Map toMap() {
+    return {"mod": getMod().index, "time": getTime()};
+  }
+
+
 }
 
-class DeathLine extends TimeToEnd{
+TimeToEnd timeToEndFromMap(Map map) {
+  var idx = map["mod"] as int;
+  switch (TimeMod.values[idx]) {
+    case TimeMod.deathLine:
+      return DeathLine(getTime(map["time"]));
+    case TimeMod.limitless:
+      return Limitless();
+  }
+}
+
+class DeathLine extends TimeToEnd {
   TimeRepresentation ddl;
 
   DeathLine(this.ddl);
@@ -20,7 +33,7 @@ class DeathLine extends TimeToEnd{
   TimeMod getMod() => TimeMod.deathLine;
 
   @override
-  TimeRepresentation? getTime()=> ddl;
+  TimeRepresentation? getTime() => ddl;
 }
 
 class Limitless extends TimeToEnd {

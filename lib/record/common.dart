@@ -44,10 +44,20 @@ mixin Tagable {
     bitmap = bitmap & Int32(~(1 << tagId));
   }
 
+  List<int> getAllTagId() {
+    List<int> tags = List.empty(growable: true);
+    for (int offset = 0; offset < 32; offset++) {
+      if ((bitmap) & Int32((1 << offset)) != Int32(0)) {
+        tags.add(offset);
+      }
+    }
+    return tags;
+  }
+
   List<Tag> getAllTag({TagMap map = const {}}) {
     List<Tag> tags = List.empty(growable: true);
     for (int offset = 0; offset < 32; offset++) {
-      if ((bitmap ) & Int32((1<<offset)) != Int32(0)) {
+      if ((bitmap) & Int32((1 << offset)) != Int32(0)) {
         var tagInfo = map[offset];
         if (tagInfo != null) {
           tags.add(tagInfo);

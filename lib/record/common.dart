@@ -2,6 +2,7 @@ import 'package:fixnum/fixnum.dart';
 
 import '../tag.dart';
 
+
 mixin Finishible {
   bool state = false;
 

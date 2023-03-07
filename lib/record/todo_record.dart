@@ -24,6 +24,8 @@ class TodoRecord
     setState(state:map["isFinish"]);
   }
 
+  TodoRecord.deepCopy(TodoRecord rhs):this.fromDict(rhs.toMap());
+
   bool canFinish() =>
       groups.every((element) => element.getFinishNum() == element.getLength());
 
@@ -34,19 +36,18 @@ class TodoRecord
           groups.map((e) => e.getLength()).reduce((value, element) =>
           value += element);
 
-  @override
-  bool isFinish() {
-    assert(canFinish());
-    return super.isFinish();
-  }
 
   @override
+  bool isFinish() {
+    return canFinish() && super.isFinish();
+  }
+
   Map toMap() {
     return {
       "msg": message,
       "priority": getPriority(),
       "tags": getAllTagId(),
-      "ddl": end,
+      "ddl": end.toMap(),
       "isFinish":isFinish(),
       "groups": groups.map((e) => e.toMap()).toList()
     };

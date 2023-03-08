@@ -2,7 +2,6 @@ import 'package:fixnum/fixnum.dart';
 
 import '../tag.dart';
 
-
 mixin Finishible {
   bool state = false;
 
@@ -15,15 +14,27 @@ mixin Finishible {
   bool isFinish() => state;
 }
 
-mixin Priorityable {
-  int priority = 5;
+enum Priority {
+  level0,
+  level1,
+  level2,
+  level3,
+  level4,
+  level5,
+  level6,
+  level7,
+  level8,
+  level9,
+}
 
-  setPriority({int priority = 5}) {
-    assert(priority >= 1 && priority <= 9);
+mixin Priorityable {
+  Priority priority = Priority.level5;
+
+  setPriority({Priority priority = Priority.level5}) {
     this.priority = priority;
   }
 
-  int getPriority() => priority;
+  Priority getPriority() => priority;
 }
 
 mixin Tagable {
@@ -67,6 +78,8 @@ mixin Tagable {
     }
     return tags;
   }
+
+  Int32 getBitmap() => bitmap;
 }
 
 mixin FinishRate {

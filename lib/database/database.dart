@@ -2,20 +2,23 @@ import 'package:todo_record/record/todo_record.dart';
 import 'package:todo_record/tag.dart';
 
 abstract class Database {
-  Future<void> saveTodoRecord(TodoRecord record, {int id = 0});
+  removeTodoRecord(int id);
 
-  Future<List<ContainId<TodoRecord>>> findAllTodoRecord({
+  saveTodoRecord(TodoRecord record, {int id = 0});
+
+  List<ContainId<TodoRecord>> findAllTodoRecord({
     Map filter = const {},
   });
 
-  Future<TagMap> getTapMap();
+  TagMap getTagMap();
 
-  Future<void> saveTag({required Tag tag});
+  saveTag({required Tag tag});
 
-  Future<void> saveFilter(
-      {Map<int, bool>? priorityFilter, Map<int, bool>? tagFilter});
+  removeTag({required Tag tag});
 
-  Future<Map<int, bool>> getFilter(FilterType type);
+  saveFilter({Map<int, bool>? priorityFilter, Map<int, bool>? tagFilter});
+
+  Map<int, bool> getFilter(FilterType type);
 }
 
 enum FilterType { priority, tag }

@@ -1,10 +1,11 @@
-import 'dart:ui';
-
 class Tag {
   final String msg;
   final int id;
-  final Color color;
-  Tag(this.msg, this.id, this.color);
+
+  Tag(
+    this.msg,
+    this.id,
+  );
 
   @override
   String toString() => "Tag[$id]: $msg";
@@ -13,14 +14,14 @@ class Tag {
   bool operator ==(Object other) {
     if (other.runtimeType == Tag) {
       other as Tag;
-      return id == other.id && msg == other.msg && color == other.color;
+      return id == other.id && msg == other.msg;
     } else {
       return false;
     }
   }
 
   @override
-  int get hashCode => id.hashCode + msg.hashCode + color.hashCode;
+  int get hashCode => id.hashCode + msg.hashCode;
 }
 
 typedef TagMap = Map<int, Tag>;

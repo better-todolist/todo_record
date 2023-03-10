@@ -80,6 +80,12 @@ mixin Tagable {
   }
 
   Int32 getBitmap() => bitmap;
+
+  setBitmap(int bitmap) {
+    assert(
+        bitmap <= Int32.MAX_VALUE.toInt() && bitmap >= Int32.MIN_VALUE.toInt());
+    this.bitmap = Int32(bitmap);
+  }
 }
 
 mixin FinishRate {

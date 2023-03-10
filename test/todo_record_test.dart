@@ -1,6 +1,3 @@
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:todo_record/record/common.dart';
@@ -27,23 +24,42 @@ main() {
     a.addTag(tagId: 2);
 
     var tags = a.getAllTag(map: {
-      0: Tag("tag0", 0, const Color.fromARGB(1, 1, 1, 1)),
-      1: Tag("tag1", 1, const Color.fromARGB(1, 1, 1, 1)),
-      2: Tag("tag2", 2, const Color.fromARGB(1, 1, 1, 1)),
+      0: Tag(
+        "tag0",
+        0,
+      ),
+      1: Tag(
+        "tag1",
+        1,
+      ),
+      2: Tag(
+        "tag2",
+        2,
+      ),
     });
 
     expect(tags, [
-      Tag("tag0", 0, const Color.fromARGB(1, 1, 1, 1)),
-      Tag("tag1", 1, const Color.fromARGB(1, 1, 1, 1)),
-      Tag("tag2", 2, const Color.fromARGB(1, 1, 1, 1))
+      Tag(
+        "tag0",
+        0,
+      ),
+      Tag(
+        "tag1",
+        1,
+      ),
+      Tag(
+        "tag2",
+        2,
+      )
     ]);
   });
 
   test("test deep copy", () {
-    var r = TodoRecord("A", end: Limitless(),groups: [SubTodoGroup("A", [SubRecord("A")])])
+    var r = TodoRecord("A", end: Limitless(), groups: [
+      SubTodoGroup("A", [SubRecord("A")])
+    ])
       ..addTag(tagId: 0)
-      ..addTag(tagId: 1)
-      ;
+      ..addTag(tagId: 1);
 
     var rc = TodoRecord.deepCopy(r);
 
